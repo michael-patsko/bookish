@@ -6,7 +6,7 @@
 <div class="text-center">
     @foreach(Book book in Model)
     {
-        <p>@book.Title, @book.Genre, @book.YearPublished</p>
+        <p>@book.Title, @book.Genre.Name, @book.YearPublished</p>
         @foreach(Author author in book.Authors)
         {
             <p>@author.Name</p>

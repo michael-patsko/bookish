@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Bookish.Models;
+using Bookish.Models.Requests;
 
 namespace Bookish.Controllers;
 using Bookish.Services;
@@ -20,6 +21,13 @@ public class BookController : Controller
     {
         List<Book> books = _bookService.GetAllBooks();
         return View(books);
+    }
+
+    [HttpPost("/Book/Create")]
+    public IActionResult CreateBook([FromBody] CreateBookRequest request) { 
+        Book book = _bookService.CreateBook(request);
+        return View("Book", book);
+
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
