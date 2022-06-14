@@ -10,11 +10,11 @@ public class BookController : Controller
 {
     private readonly ILogger<BookController> _logger;
     private BookService _bookService;
+
     public BookController(ILogger<BookController> logger)
     {
         _logger = logger;
         _bookService = new BookService();
-
     }
 
     public IActionResult Index()
@@ -23,16 +23,20 @@ public class BookController : Controller
         return View(books);
     }
 
-    [HttpPost("/Book/Create")]
-    public IActionResult CreateBook([FromBody] CreateBookRequest request) { 
+    [HttpPost("/Book")]
+    public IActionResult CreateBook([FromBody] CreateBookRequest request)
+    {
         Book book = _bookService.CreateBook(request);
-        return View("Book", book);
-
+        List<Book> books = new List<Book>();
+        books.Add(book);
+        return View("Index", books);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View(
+            new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }
+        );
     }
 }
