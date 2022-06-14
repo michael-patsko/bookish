@@ -1,7 +1,14 @@
+@model List<Member>
 @{
-    ViewData["Title"] = "Member";
+    ViewData["Title"] = "Members";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Member's Page</h1>
+    @foreach(Member member in Model)
+    {
+        <p>@member.Name</p>
+        <p>@member.Address</p>
+        <p>@member.Email</p>
+    }
+    
 </div>

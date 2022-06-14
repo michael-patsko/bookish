@@ -1,21 +1,17 @@
+@model List<Book>
 @{
-    ViewData["Title"] = "Book";
+    ViewData["Title"] = "Books";
 }
 
 <div class="text-center">
-    <h1 class="display-4">The Beekeeper of Aleppo</h1>
-    <h2 class="display-6">Christy Lefteri</h2>
-    <img src = "https://m.media-amazon.com/images/I/51f86bJCLKL.jpg"/>
-    <p>In the midst of war, he found love<br>
-        In the midst of darkness, he found courage<br>
-        In the midst of tragedy, he found hope<br>
-        <br>
-        What will you find from his story?<br>
-        <br>
-        Nuri is a beekeeper; his wife, Afra, an artist. They live a simple life, rich in family and friends, in the beautiful Syrian city of Aleppo - until the unthinkable happens. When all they care for is destroyed by war, they are forced to escape.<br>
-        <br>
-        As Nuri and Afra travel through a broken world, they must confront not only the pain of their own unspeakable loss, but dangers that would overwhelm the bravest of souls. Above all - and perhaps this is the hardest thing they face - they must journey to find each other again.<br>
-        <br>
-        Moving, powerful, compassionate and beautifully written, The Beekeeper of Aleppo is a testament to the triumph of the human spirit. Told with deceptive simplicity, it is the kind of book that reminds us of the power of storytelling.
-</p>
+    @foreach(Book book in Model)
+    {
+        <p>@book.Title, @book.Genre, @book.YearPublished</p>
+        @foreach(Author author in book.Authors)
+        {
+            <p>@author.Name</p>
+        }
+        <img width="250px" src="@book.CoverImageUrl"></img>
+    }
+    
 </div>
